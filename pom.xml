@@ -17,7 +17,7 @@
 
     <groupId>com.maartenmusic</groupId>
     <artifactId>pet-clinic</artifactId>
-    <version>1</version>
+    <version>0.0.1-SNAPSHOT</version>
     <name>pet-clinic</name>
     <description>Pet Clinic Project</description>
 
@@ -27,7 +27,7 @@
 
     <scm>
     <url>https://github.com/MaartenBakker/pet-clinic</url>
-    <connection>scm:git:git://github.com/MaartenBakker/pet-clinic.git</connection>
+    <connection>scm:git:https://github.com/MaartenBakker/pet-clinic.git</connection>
 <!--    <developerConnection>https://github.com/MaartenBakker/pet-clinic</developerConnection>-->
       <tag>1</tag>
   </scm>
