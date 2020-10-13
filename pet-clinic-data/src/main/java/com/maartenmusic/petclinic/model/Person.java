@@ -10,7 +10,7 @@ public class Person extends BaseEntity {
     // == constructors ===
 
 
-    // === getters setters ===
+    // === getters & setters ===
 
 
     public String getFirstName() {
