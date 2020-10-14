@@ -1,6 +1,6 @@
 package com.maartenmusic.petclinic.model;
 
-public class Person {
+public class Person extends BaseEntity {
 
     // === fields ===
 
@@ -10,7 +10,7 @@ public class Person {
     // == constructors ===
 
 
-    // === getters setters ===
+    // === getters & setters ===
 
 
     public String getFirstName() {
