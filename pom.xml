@@ -29,8 +29,8 @@
     <url>https://github.com/MaartenBakker/pet-clinic</url>
     <connection>scm:git:https://github.com/MaartenBakker/pet-clinic.git</connection>
 <!--    <developerConnection>https://github.com/MaartenBakker/pet-clinic</developerConnection>-->
-      <tag>1</tag>
-  </scm>
+    <tag>1</tag>
+    </scm>
 
 
     <build>
@@ -45,6 +45,7 @@
                 <version>3.0.0-M1</version>
                 <configuration>
                     <goals>install</goals>
+                    <autoVersionSubmodules>true</autoVersionSubmodules>
                 </configuration>
             </plugin>
         </plugins>
