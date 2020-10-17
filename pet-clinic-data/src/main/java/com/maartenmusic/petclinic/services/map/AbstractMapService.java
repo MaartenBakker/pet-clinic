@@ -1,12 +1,8 @@
 package com.maartenmusic.petclinic.services.map;
 
 import com.maartenmusic.petclinic.model.BaseEntity;
-import org.springframework.lang.NonNull;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public abstract class AbstractMapService<T extends BaseEntity, ID extends Long> {
 
@@ -21,8 +17,14 @@ public abstract class AbstractMapService<T extends BaseEntity, ID extends Long> 
     }
 
     T save(T object) {
-
-        map.put(object.getId(), object);
+        if (object != null) {
+            if(object.getId() == null) {
+                object.setId(getNextId());
+            }
+            map.put(object.getId(), object);
+        } else {
+            throw new RuntimeException("Object cannot be null");
+        }
 
         return object;
     }
@@ -33,5 +35,11 @@ public abstract class AbstractMapService<T extends BaseEntity, ID extends Long> 
 
     void delete(T object) {
         map.entrySet().removeIf(e -> e.getValue().equals(object));
+    }
+
+    private Long getNextId(){
+
+        return map.isEmpty()? 1L : Collections.max(map.keySet()) + 1;
+
     }
 }
