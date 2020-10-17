@@ -17,7 +17,7 @@ public class DataLoader implements CommandLineRunner {
 
     public DataLoader(@Qualifier("ownerServiceMap") OwnerService ownerService,
                       @Qualifier("vetServiceMap") VetService vetService) {
-        this.ownerService = new OwnerServiceMap();
+        this.ownerService = ownerService;
         this.vetService = vetService;
     }
 
