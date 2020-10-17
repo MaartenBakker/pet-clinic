@@ -2,9 +2,11 @@ package com.maartenmusic.petclinic.services.map;
 
 import com.maartenmusic.petclinic.model.Pet;
 import com.maartenmusic.petclinic.services.PetService;
+import org.springframework.stereotype.Service;
 
 import java.util.Set;
 
+@Service
 public class PetServiceMap extends AbstractMapService<Pet, Long> implements PetService {
 
     @Override
@@ -18,8 +20,8 @@ public class PetServiceMap extends AbstractMapService<Pet, Long> implements PetS
     }
 
     @Override
-    public Pet save(Long id, Pet object) {
-        return super.save(id, object);
+    public Pet save(Pet object) {
+        return super.save(object);
     }
 
     @Override
