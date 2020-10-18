@@ -30,7 +30,7 @@
     <connection>scm:git:https://github.com/MaartenBakker/pet-clinic.git</connection>
 <!--    <developerConnection>https://github.com/MaartenBakker/pet-clinic</developerConnection>-->
       <tag>1</tag>
-  </scm>
+    </scm>
 
 
     <build>
