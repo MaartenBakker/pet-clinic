@@ -6,6 +6,7 @@ public class Pet extends BaseEntity {
 
     //    == fields ==
 
+    private String name;
     private PetType petType;
     private Owner owner;
     private LocalDate birthDate;
@@ -14,6 +15,14 @@ public class Pet extends BaseEntity {
 
     // == getters & setters
 
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public PetType getPetType() {
         return petType;

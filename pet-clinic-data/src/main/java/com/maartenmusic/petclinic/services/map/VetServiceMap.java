@@ -1,12 +1,20 @@
 package com.maartenmusic.petclinic.services.map;
 
 import com.maartenmusic.petclinic.model.Vet;
+import com.maartenmusic.petclinic.services.SpecialityService;
 import com.maartenmusic.petclinic.services.VetService;
+import org.springframework.stereotype.Service;
 
 import java.util.Set;
 
+@Service
 public class VetServiceMap extends AbstractMapService<Vet, Long> implements VetService {
 
+    SpecialityService specialityService;
+
+    public VetServiceMap(SpecialityService specialityService) {
+        this.specialityService = specialityService;
+    }
 
     @Override
     public Set<Vet> findAll() {
@@ -19,8 +27,20 @@ public class VetServiceMap extends AbstractMapService<Vet, Long> implements VetS
     }
 
     @Override
-    public Vet save(Long id, Vet object) {
-        return super.save(id, object);
+    public Vet save(Vet object) {
+        if (object != null) {
+            if (!object.getSpecialities().isEmpty()) {
+                object.getSpecialities().forEach(speciality -> {
+                    if (speciality.getId() == null) {
+                        specialityService.save(speciality);
+                    }
+                });
+            }
+
+            return super.save(object);
+        }
+
+        return null;
     }
 
     @Override
