@@ -5,7 +5,10 @@ import com.maartenmusic.petclinic.repositories.SpecialityRepository;
 import com.maartenmusic.petclinic.services.SpecialityService;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
+
 @Service
+@Transactional
 public class SpecialitySDJpaService extends AbstractSDJpaService<Speciality, SpecialityRepository>
         implements SpecialityService {
 

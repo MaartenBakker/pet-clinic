@@ -4,11 +4,13 @@ import com.maartenmusic.petclinic.model.Owner;
 import com.maartenmusic.petclinic.services.OwnerService;
 import com.maartenmusic.petclinic.services.PetService;
 import com.maartenmusic.petclinic.services.PetTypeService;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
 import java.util.Set;
 
 @Service
+@Profile("map")
 public class OwnerServiceMap extends AbstractMapService<Owner, Long> implements OwnerService {
 
     private final PetTypeService petTypeService;
@@ -18,8 +20,6 @@ public class OwnerServiceMap extends AbstractMapService<Owner, Long> implements 
         this.petTypeService = petTypeService;
         this.petService = petService;
     }
-
-
 
     @Override
     public Owner findByLastName(String lastName) {

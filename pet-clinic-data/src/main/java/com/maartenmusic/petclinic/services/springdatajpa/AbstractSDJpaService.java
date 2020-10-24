@@ -5,6 +5,7 @@ import com.maartenmusic.petclinic.services.CrudService;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 public abstract class AbstractSDJpaService<T extends BaseEntity, R extends CrudRepository<T, Long>>
@@ -29,12 +30,7 @@ public abstract class AbstractSDJpaService<T extends BaseEntity, R extends CrudR
 
     @Override
     public T findById(Long id) {
-
-        if (repository.findById(id).isPresent()) {
-            return repository.findById(id).get();
-        } else {
-            return null;
-        }
+        return repository.findById(id).orElse(null);
     }
 
     @Override

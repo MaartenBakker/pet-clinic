@@ -5,7 +5,10 @@ import com.maartenmusic.petclinic.repositories.VetRepository;
 import com.maartenmusic.petclinic.services.VetService;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
+
 @Service
+@Transactional
 public class VetSDJpaService extends AbstractSDJpaService<Vet, VetRepository> implements VetService {
 
     public VetSDJpaService(VetRepository repository) {

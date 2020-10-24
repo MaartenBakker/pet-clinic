@@ -5,7 +5,10 @@ import com.maartenmusic.petclinic.repositories.OwnerRepository;
 import com.maartenmusic.petclinic.services.OwnerService;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
+
 @Service
+@Transactional
 public class OwnerSDJpaService extends AbstractSDJpaService<Owner, OwnerRepository> implements OwnerService {
 
     public OwnerSDJpaService(OwnerRepository repository) {

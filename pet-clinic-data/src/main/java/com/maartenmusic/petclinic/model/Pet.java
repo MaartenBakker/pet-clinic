@@ -5,6 +5,8 @@ import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
+import static javax.persistence.CascadeType.*;
+
 @Entity
 @Table(name = "pets")
 public class Pet extends BaseEntity {
@@ -16,7 +18,7 @@ public class Pet extends BaseEntity {
     @JoinColumn(name = "type_id")
     private PetType petType;
 
-    @ManyToOne
+    @ManyToOne(cascade = {PERSIST, MERGE, REFRESH, DETACH})
     @JoinColumn(name = "owner_id")
     private Owner owner;
 
