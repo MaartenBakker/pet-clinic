@@ -3,6 +3,9 @@ package com.maartenmusic.petclinic.model;
 import javax.persistence.*;
 import java.time.LocalDate;
 
+import static javax.persistence.CascadeType.*;
+import static javax.persistence.CascadeType.DETACH;
+
 @Entity
 @Table(name = "visits")
 public class Visit extends BaseEntity {
@@ -13,7 +16,7 @@ public class Visit extends BaseEntity {
     @Column(name = "description")
     private String description;
 
-    @ManyToOne
+    @ManyToOne(cascade = {PERSIST, REFRESH, DETACH})
     @JoinColumn(name = "pet_id")
     private Pet pet;
 

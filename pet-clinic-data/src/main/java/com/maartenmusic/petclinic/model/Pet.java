@@ -18,7 +18,7 @@ public class Pet extends BaseEntity {
     @JoinColumn(name = "type_id")
     private PetType petType;
 
-    @ManyToOne(cascade = {PERSIST, MERGE, REFRESH, DETACH})
+    @ManyToOne(cascade = {PERSIST, REFRESH, DETACH})
     @JoinColumn(name = "owner_id")
     private Owner owner;
 

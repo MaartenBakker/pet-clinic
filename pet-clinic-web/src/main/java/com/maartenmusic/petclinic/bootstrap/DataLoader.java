@@ -17,21 +17,24 @@ public class DataLoader implements CommandLineRunner {
     private final PetService petService;
     private final PetTypeService petTypeService;
     private final SpecialityService specialityService;
+    private final VisitService visitService;
 
     public DataLoader(OwnerService ownerService,
                       VetService vetService,
                       PetService petService,
                       PetTypeService petTypeService,
-                      SpecialityService specialityService) {
+                      SpecialityService specialityService,
+                      VisitService visitService) {
         this.ownerService = ownerService;
         this.vetService = vetService;
         this.petService = petService;
         this.petTypeService = petTypeService;
         this.specialityService = specialityService;
+        this.visitService = visitService;
     }
 
     @Override
-    public void run(String... args) throws Exception {
+    public void run(String... args) {
 
         int count = petTypeService.findAll().size();
 
@@ -64,6 +67,15 @@ public class DataLoader implements CommandLineRunner {
         maartensPet.setOwner(owner1);
         maartensPet.setBirthDate(LocalDate.now());
         maartensPet.setName("Darwin");
+
+        Visit maartensPetVisit = new Visit();
+        maartensPetVisit.setDate(LocalDate.now());
+        maartensPetVisit.setPet(maartensPet);
+        maartensPetVisit.setDescription("Visit of " + maartensPet.getName());
+
+        Visit savedMaartensPetVisit =  visitService.save(maartensPetVisit);
+        maartensPet.getVisits().add(savedMaartensPetVisit);
+
         Pet savedMaartensPet = petService.save(maartensPet);
 
         owner1.getPets().add(savedMaartensPet);
