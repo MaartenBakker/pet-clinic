@@ -1,17 +1,16 @@
 package com.maartenmusic.petclinic.model;
 
+import javax.persistence.Column;
+import javax.persistence.MappedSuperclass;
+
+@MappedSuperclass
 public class Person extends BaseEntity {
 
-    // === fields ===
-
+    @Column(name = "first_name")
     private String firstName;
+
+    @Column(name = "last_name")
     private String lastName;
-
-    // == constructors ===
-
-
-    // === getters & setters ===
-
 
     public String getFirstName() {
         return firstName;
