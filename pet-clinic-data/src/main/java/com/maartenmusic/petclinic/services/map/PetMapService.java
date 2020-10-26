@@ -1,7 +1,7 @@
 package com.maartenmusic.petclinic.services.map;
 
-import com.maartenmusic.petclinic.model.Speciality;
-import com.maartenmusic.petclinic.services.SpecialityService;
+import com.maartenmusic.petclinic.model.Pet;
+import com.maartenmusic.petclinic.services.PetService;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
@@ -9,25 +9,25 @@ import java.util.Set;
 
 @Service
 @Profile("map")
-public class SpecialityServiceMap extends AbstractMapService<Speciality, Long> implements SpecialityService {
+public class PetMapService extends AbstractMapService<Pet, Long> implements PetService {
 
     @Override
-    public Set<Speciality> findAll() {
+    public Set<Pet> findAll() {
         return super.findAll();
     }
 
     @Override
-    public Speciality findById(Long id) {
+    public Pet findById(Long id) {
         return super.findById(id);
     }
 
     @Override
-    public Speciality save(Speciality object) {
+    public Pet save(Pet object) {
         return super.save(object);
     }
 
     @Override
-    public void delete(Speciality object) {
+    public void delete(Pet object) {
         super.delete(object);
     }
 
