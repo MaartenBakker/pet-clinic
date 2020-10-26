@@ -2,8 +2,7 @@ package com.maartenmusic.petclinic.bootstrap;
 
 import com.maartenmusic.petclinic.model.*;
 import com.maartenmusic.petclinic.services.*;
-import com.maartenmusic.petclinic.services.map.OwnerServiceMap;
-import org.springframework.beans.factory.annotation.Qualifier;
+
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
