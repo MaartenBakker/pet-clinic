@@ -72,14 +72,14 @@ public class DataLoader implements CommandLineRunner {
         maartensPetVisit.setPet(maartensPet);
         maartensPetVisit.setDescription("Visit of " + maartensPet.getName());
 
-        Visit savedMaartensPetVisit =  visitService.save(maartensPetVisit);
-        maartensPet.getVisits().add(savedMaartensPetVisit);
+        maartensPet.getVisits().add(maartensPetVisit);
 
         Pet savedMaartensPet = petService.save(maartensPet);
 
         owner1.getPets().add(savedMaartensPet);
 
         ownerService.save(owner1);
+        visitService.save(maartensPetVisit);
 
         Owner owner2 = new Owner();
         owner2.setFirstName("Anna");

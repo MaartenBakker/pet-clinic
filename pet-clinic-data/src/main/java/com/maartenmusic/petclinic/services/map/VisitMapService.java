@@ -3,11 +3,13 @@ package com.maartenmusic.petclinic.services.map;
 import com.maartenmusic.petclinic.model.Visit;
 import com.maartenmusic.petclinic.services.PetService;
 import com.maartenmusic.petclinic.services.VisitService;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
 import java.util.Set;
 
 @Service
+@Profile({"default", "map"})
 public class VisitMapService extends AbstractMapService<Visit, Long> implements VisitService {
 
     private final PetService petService;
