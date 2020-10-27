@@ -7,6 +7,7 @@ import com.maartenmusic.petclinic.services.PetTypeService;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
+import java.util.Map;
 import java.util.Set;
 
 @Service
@@ -23,9 +24,9 @@ public class OwnerMapService extends AbstractMapService<Owner, Long> implements 
 
     @Override
     public Owner findByLastName(String lastName) {
-        Set<Owner> ownerSet = super.findAll();
-        for (Owner owner : ownerSet) {
-            if(owner.getLastName().equals(lastName)) {
+        Map<Long,Owner> ownerSet = super.map;
+        for (Owner owner : ownerSet.values()) {
+            if(owner.getLastName().equalsIgnoreCase(lastName)) {
                 return owner;
             }
         }
