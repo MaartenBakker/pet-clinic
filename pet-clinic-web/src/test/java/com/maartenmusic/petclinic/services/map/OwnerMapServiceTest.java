@@ -52,10 +52,18 @@ class OwnerMapServiceTest {
     }
 
     @Test
-    void save() {
+    void saveAutoIncrId() {
         Owner owner2 = ownerMapService.save(new Owner());
 
         assertEquals(2L, owner2.getId());
+    }
+
+    @Test
+    void saveCustomId() {
+        Owner owner2 = Owner.builder().id(10L).build();
+        Owner owner3 = ownerMapService.save(owner2);
+
+        assertEquals(10L, owner3.getId());
     }
 
     @Test
