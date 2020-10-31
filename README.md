@@ -1,4 +1,4 @@
-https://circleci.com/gh/MaartenBakker/pet-clinic.svg?style=svg
+![CirleCi badge](https://circleci.com/gh/MaartenBakker/pet-clinic.svg?style=svg)
 
 # pet-clinic
 
