@@ -19,14 +19,17 @@ jobs:
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
-      - run: ./mvnw -Dmaven.test.skip=true package
 
-workflows:
-  version: 2
+      - restore_cache:
+          - keys:
+          - v1-dependencies-{{ checksum "pom.xml" }}
+          - v1-dependencies-
+          -
+      - run: mvn dependency:go-offline
 
-  build-then-test:
-    jobs:
-      - build
-      - test:
-          requires:
-            - build
+      - save_cache:
+          paths:
+          - ~/.m2
+          key: v1-dependencies-{{ checksum "pom.xml" }}
+
+      - run: mvn integration-test
