@@ -13,7 +13,9 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
+import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import static org.hamcrest.Matchers.*;
@@ -62,11 +64,34 @@ class OwnerControllerTest {
 
         mockMvc.perform(get("/owners/find"))
                 .andExpect(status().isOk())
-                .andExpect(view().name("notimplemented"))
+                .andExpect(view().name("owners/findowners"))
                 .andExpect(model().attributeDoesNotExist("owners"));
 
         verifyNoInteractions(ownerService);
     }
+
+    @Test
+    void processFindFormReturnMany() throws Exception {
+        when(ownerService.findAllByLastNameLike(anyString())).thenReturn(owners);
+
+        mockMvc.perform((get("/owners")))
+                .andExpect(status().isOk())
+                .andExpect(view().name("owners/ownerslist"))
+                .andExpect(model().attribute("owners", hasSize(2)));
+    }
+
+    @Test
+    void processFindFormReturnOne() throws Exception {
+        when(ownerService.findAllByLastNameLike(anyString())).thenReturn(Arrays.asList(Owner.builder().id(1L).build()));
+
+        mockMvc.perform((get("/owners")))
+                .andExpect(status().isOk())
+                .andExpect(view().name("owners/1"))
+                .andExpect(model().attribute("owner", hasProperty("id", is(1L)));
+    }
+
+
+
 
     @Test
     void displayOwner() throws Exception {
