@@ -15,7 +15,6 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import java.util.Arrays;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import static org.hamcrest.Matchers.*;
@@ -46,17 +45,17 @@ class OwnerControllerTest {
     }
 
 
-    @ParameterizedTest
-    @ValueSource(strings = {"/owners", "/owners/", "/owners/index", "/owners/index.html"})
-    void listOwners(String urlPath) throws Exception {
-        when(ownerService.findAll()).thenReturn(owners);
-
-        mockMvc.perform(get(urlPath))
-                .andExpect(status().isOk())
-                .andExpect(view().name("owners/index"))
-                .andExpect(model().attribute("owners", owners))
-                .andExpect(model().attribute("owners", hasSize(2)));
-    }
+//    @ParameterizedTest
+//    @ValueSource(strings = {"/owners", "/owners/", "/owners/index", "/owners/index.html"})
+//    void listOwners(String urlPath) throws Exception {
+//        when(ownerService.findAll()).thenReturn(owners);
+//
+//        mockMvc.perform(get(urlPath))
+//                .andExpect(status().isOk())
+//                .andExpect(view().name("owners/index"))
+//                .andExpect(model().attribute("owners", owners))
+//                .andExpect(model().attribute("owners", hasSize(2)));
+//    }
 
 
     @Test
@@ -72,12 +71,15 @@ class OwnerControllerTest {
 
     @Test
     void processFindFormReturnMany() throws Exception {
-        when(ownerService.findAllByLastNameLike(anyString())).thenReturn(owners);
+        when(ownerService.findAllByLastNameLike(anyString()))
+                .thenReturn(Arrays.asList(
+                        Owner.builder().id(1L).build(),
+                        Owner.builder().id(2L).build()));
 
         mockMvc.perform((get("/owners")))
                 .andExpect(status().isOk())
                 .andExpect(view().name("owners/ownerslist"))
-                .andExpect(model().attribute("owners", hasSize(2)));
+                .andExpect(model().attribute("selections", hasSize(2)));
     }
 
     @Test
@@ -85,9 +87,8 @@ class OwnerControllerTest {
         when(ownerService.findAllByLastNameLike(anyString())).thenReturn(Arrays.asList(Owner.builder().id(1L).build()));
 
         mockMvc.perform((get("/owners")))
-                .andExpect(status().isOk())
-                .andExpect(view().name("owners/1"))
-                .andExpect(model().attribute("owner", hasProperty("id", is(1L)));
+                .andExpect(status().is3xxRedirection())
+                .andExpect(view().name("redirect:/owners/1"));
     }
 
 
