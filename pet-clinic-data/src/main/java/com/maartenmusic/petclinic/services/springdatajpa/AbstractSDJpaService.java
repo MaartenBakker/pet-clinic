@@ -5,7 +5,6 @@ import com.maartenmusic.petclinic.services.CrudService;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.HashSet;
-import java.util.Optional;
 import java.util.Set;
 
 public abstract class AbstractSDJpaService<T extends BaseEntity, R extends CrudRepository<T, Long>>
