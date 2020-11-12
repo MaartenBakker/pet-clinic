@@ -114,9 +114,9 @@ class OwnerControllerTest {
 
     @Test
     void initCreationForm() throws Exception {
-        mockMvc.perform(get("owners/new"))
+        mockMvc.perform(get("/owners/new"))
                 .andExpect(status().isOk())
-                .andExpect(view().name("owners/createorupdateownerform"))
+                .andExpect(view().name("owners/createOrUpdateOwnerForm"))
                 .andExpect(model().attributeExists("owner"));
 
         verifyNoInteractions(ownerService);
@@ -136,9 +136,9 @@ class OwnerControllerTest {
 
     @Test
     void initUpdateForm() throws Exception {
-        mockMvc.perform(get("owners/1/edit"))
+        mockMvc.perform(get("/owners/1/edit"))
                 .andExpect(status().isOk())
-                .andExpect(view().name("owners/createorupdateownerform"))
+                .andExpect(view().name("owners/createOrUpdateOwnerForm"))
                 .andExpect(model().attributeExists("owenr"));
     }
 
