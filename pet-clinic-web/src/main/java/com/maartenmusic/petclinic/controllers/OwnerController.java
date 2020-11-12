@@ -51,10 +51,14 @@ public class OwnerController {
         // allow parameterless GET request for /owners to return all records
         if(owner.getLastName() == null) {
             owner.setLastName(""); // empty string signifies broadest possible search
+        } else {
+            String lastName = owner.getLastName();
+            lastName = lastName.substring(0,1).toUpperCase() + lastName.substring(1);
+            owner.setLastName(lastName);
         }
 
         //find owners by last name
-        List<Owner> results = ownerService.findAllByLastNameLike(owner.getLastName());
+        List<Owner> results = ownerService.findAllByLastNameLike("%" + owner.getLastName() + "%");
         if (results.size() == 0) {
             result.rejectValue("lastName", "notFound", "not found");
             return "owners/findowners";
