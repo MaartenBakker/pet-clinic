@@ -1,6 +1,7 @@
 package com.maartenmusic.petclinic.controllers;
 
 import com.maartenmusic.petclinic.model.Owner;
+import com.maartenmusic.petclinic.model.Pet;
 import com.maartenmusic.petclinic.model.PetType;
 import com.maartenmusic.petclinic.services.OwnerService;
 import com.maartenmusic.petclinic.services.PetService;
@@ -77,7 +78,9 @@ class PetControllerTest {
 
     @Test
     void initUpdateForm() throws Exception {
-        mockMvc.perform(get("/owners/1/pets/edit"))
+        when(petService.findById(anyLong())).thenReturn(Pet.builder().build());
+
+        mockMvc.perform(get("/owners/1/pets/1/edit"))
                 .andExpect(status().isOk())
                 .andExpect(model().attributeExists("owner"))
                 .andExpect(model().attributeExists("types"))
@@ -87,7 +90,7 @@ class PetControllerTest {
 
     @Test
     void processUpdateForm() throws Exception {
-        mockMvc.perform(post("/owners/1/pets/edit"))
+        mockMvc.perform(post("/owners/1/pets/1/edit"))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(view().name("redirect:/owners/1"));
 
