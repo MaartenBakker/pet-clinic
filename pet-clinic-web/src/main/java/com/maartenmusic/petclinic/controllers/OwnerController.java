@@ -31,7 +31,7 @@ public class OwnerController {
 
     @GetMapping("/find")
     public String findOwners(Model model) {
-        model.addAttribute("owner", Owner.builder().build());
+        model.addAttribute("owner", new Owner());
 
         return "owners/findowners";
 
@@ -47,7 +47,7 @@ public class OwnerController {
     }
 
     @GetMapping({"", "/", "/index", "/index.html"})
-    public String processFindForm(Owner owner, BindingResult result, Model model) {
+    public String processFindForm(@ModelAttribute Owner owner, BindingResult result, Model model) {
         // allow parameterless GET request for /owners to return all records
         if (owner.getLastName() == null) {
             owner.setLastName(""); // empty string signifies broadest possible search
