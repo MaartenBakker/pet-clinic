@@ -47,13 +47,18 @@ public class OwnerController {
     }
 
     @GetMapping({"", "/", "/index", "/index.html"})
-    public String processFindForm(@ModelAttribute Owner owner, BindingResult result, Model model) {
+    public String processFindForm(Owner owner, BindingResult result, Model model) {
         // allow parameterless GET request for /owners to return all records
         if (owner.getLastName() == null) {
             owner.setLastName(""); // empty string signifies broadest possible search
         } else {
             String lastName = owner.getLastName();
-            lastName = lastName.substring(0, 1).toUpperCase() + lastName.substring(1);
+            lastName = lastName.trim();
+
+
+            if (lastName.length() != 0) {
+                lastName = lastName.substring(0, 1).toUpperCase() + lastName.substring(1);
+            }
             owner.setLastName(lastName);
         }
 
