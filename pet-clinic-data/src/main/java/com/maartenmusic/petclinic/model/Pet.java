@@ -1,6 +1,7 @@
 package com.maartenmusic.petclinic.model;
 
 import lombok.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -11,6 +12,7 @@ import java.util.Set;
 import static javax.persistence.CascadeType.*;
 
 @Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -30,28 +32,11 @@ public class Pet extends BaseEntity {
     private Owner owner;
 
     @Column(name = "birth_date")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate birthDate;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "pet")
     private Set<Visit> visits = new HashSet<>();
 
-    public void setName(String name) {
-        this.name = name;
-    }
 
-    public void setPetType(PetType petType) {
-        this.petType = petType;
-    }
-
-    public void setOwner(Owner owner) {
-        this.owner = owner;
-    }
-
-    public void setBirthDate(LocalDate birthDate) {
-        this.birthDate = LocalDate.parse(birthDate.toString());
-    }
-
-    public void setVisits(Set<Visit> visits) {
-        this.visits = visits;
-    }
 }

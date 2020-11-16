@@ -2,6 +2,7 @@ package com.maartenmusic.petclinic.controllers;
 
 import com.maartenmusic.petclinic.model.Owner;
 import com.maartenmusic.petclinic.services.OwnerService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -10,6 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
+@Slf4j
 @RequestMapping("/owners")
 @Controller
 public class OwnerController {
@@ -54,7 +56,6 @@ public class OwnerController {
         } else {
             String lastName = owner.getLastName();
             lastName = lastName.trim();
-
 
             if (lastName.length() != 0) {
                 lastName = lastName.substring(0, 1).toUpperCase() + lastName.substring(1);
