@@ -61,14 +61,14 @@ class PetControllerTest {
         mockMvc.perform(get("/owners/1/pets/new"))
                 .andExpect(status().isOk())
                 .andExpect(model().attributeExists("owner"))
-                .andExpect(model().attributeExists("petTypes"))
+                .andExpect(model().attributeExists("types"))
                 .andExpect(model().attributeExists("pet"))
                 .andExpect(view().name("pets/createOrUpdatePetForm"));
     }
 
     @Test
     void processCreationForm() throws Exception {
-        mockMvc.perform(get("owners/1/pets/new"))
+        mockMvc.perform(post("/owners/1/pets/new"))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(view().name("redirect:/owners/1"));
 
@@ -80,14 +80,14 @@ class PetControllerTest {
         mockMvc.perform(get("/owners/1/pets/edit"))
                 .andExpect(status().isOk())
                 .andExpect(model().attributeExists("owner"))
-                .andExpect(model().attributeExists("petTypes"))
+                .andExpect(model().attributeExists("types"))
                 .andExpect(model().attributeExists("pet"))
                 .andExpect(view().name("pets/createOrUpdatePetForm"));
     }
 
     @Test
     void processUpdateForm() throws Exception {
-        mockMvc.perform(get("owners/1/pets/edit"))
+        mockMvc.perform(post("/owners/1/pets/edit"))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(view().name("redirect:/owners/1"));
 
