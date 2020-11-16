@@ -14,7 +14,9 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
+import javax.transaction.Transactional;
 import java.util.Collection;
+import java.util.Set;
 
 @RequestMapping("/owners/{ownerId}")
 @Controller
@@ -64,6 +66,7 @@ public class PetController {
             model.addAttribute("pet", pet );
             return VIEWS_PETS_CREATE_OR_UPDATE_FORM;
         } else {
+            pet.setOwner(owner);
             petService.save(pet);
             return "redirect:/owners/" + owner.getId();
         }
@@ -83,8 +86,10 @@ public class PetController {
             return VIEWS_PETS_CREATE_OR_UPDATE_FORM;
         }
         else {
-            owner.getPets().add(pet);
+            pet.setOwner(owner);
             petService.save(pet);
+            Set<Pet> pets = owner.getPets();
+            pets.forEach(System.out::println);
             return "redirect:/owners/" + owner.getId();
         }
     }

@@ -38,5 +38,14 @@ public class Pet extends BaseEntity {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "pet")
     private Set<Visit> visits = new HashSet<>();
 
-
+    @Override
+    public String toString() {
+        return "Pet{" +
+                "name='" + name + '\'' +
+                ", petType=" + petType +
+                ", owner=" + owner +
+                ", birthDate=" + birthDate +
+                ", visits=" + visits +
+                '}';
+    }
 }

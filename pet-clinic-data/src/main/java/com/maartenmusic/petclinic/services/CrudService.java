@@ -1,5 +1,6 @@
 package com.maartenmusic.petclinic.services;
 
+import javax.transaction.Transactional;
 import java.util.Set;
 
 public interface CrudService<T, ID> {
