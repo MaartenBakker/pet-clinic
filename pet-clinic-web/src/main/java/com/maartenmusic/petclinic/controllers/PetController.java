@@ -4,6 +4,7 @@ import com.maartenmusic.petclinic.model.Owner;
 import com.maartenmusic.petclinic.model.PetType;
 
 import com.maartenmusic.petclinic.services.OwnerService;
+import com.maartenmusic.petclinic.services.PetService;
 import com.maartenmusic.petclinic.services.PetTypeService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.WebDataBinder;
@@ -19,10 +20,12 @@ import java.util.Collection;
 public class PetController {
 
     public static final String VIEWS_PET_CREATE_OR_UPDATE_FORM = "pets/createOrUpdatePetForm";
+    private final PetService petService;
     private final PetTypeService petTypeService;
     private final OwnerService ownerService;
 
-    public PetController(PetTypeService petTypeService, OwnerService ownerService) {
+    public PetController(PetService petService, PetTypeService petTypeService, OwnerService ownerService) {
+        this.petService = petService;
         this.petTypeService = petTypeService;
         this.ownerService = ownerService;
     }

@@ -1,13 +1,10 @@
 package com.maartenmusic.petclinic.controllers;
 
-import ch.qos.logback.core.encoder.EchoEncoder;
 import com.maartenmusic.petclinic.model.Owner;
 import com.maartenmusic.petclinic.services.OwnerService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.ValueSource;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
