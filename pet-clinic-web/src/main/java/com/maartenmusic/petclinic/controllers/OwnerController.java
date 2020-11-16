@@ -14,7 +14,7 @@ import java.util.List;
 @Controller
 public class OwnerController {
 
-    public static final String VIEW_OWNER_CREATE_OR_UPDATE_FORM =  "owners/createOrUpdateOwnerForm";
+    public static final String VIEWS_OWNER_CREATE_OR_UPDATE_FORM = "owners/createOrUpdateOwnerForm";
 
     private final OwnerService ownerService;
 
@@ -38,7 +38,7 @@ public class OwnerController {
     }
 
     @GetMapping("/{ownerId}")
-    public ModelAndView displayOwner(@PathVariable("ownerId") Long ownerId) {
+    public ModelAndView displayOwner(@PathVariable Long ownerId) {
         ModelAndView mav = new ModelAndView("owners/ownerdetails");
 
         mav.addObject(ownerService.findById(ownerId));
@@ -49,11 +49,11 @@ public class OwnerController {
     @GetMapping({"", "/", "/index", "/index.html"})
     public String processFindForm(Owner owner, BindingResult result, Model model) {
         // allow parameterless GET request for /owners to return all records
-        if(owner.getLastName() == null) {
+        if (owner.getLastName() == null) {
             owner.setLastName(""); // empty string signifies broadest possible search
         } else {
             String lastName = owner.getLastName();
-            lastName = lastName.substring(0,1).toUpperCase() + lastName.substring(1);
+            lastName = lastName.substring(0, 1).toUpperCase() + lastName.substring(1);
             owner.setLastName(lastName);
         }
 
@@ -62,7 +62,7 @@ public class OwnerController {
         if (results.size() == 0) {
             result.rejectValue("lastName", "notFound", "not found");
             return "owners/findowners";
-        } else if(results.size() == 1) {
+        } else if (results.size() == 1) {
             //1 owner found
             owner = results.iterator().next();
             return "redirect:/owners/" + owner.getId();
@@ -77,15 +77,38 @@ public class OwnerController {
     public String initCreationForm(Model model) {
         model.addAttribute("owner", new Owner());
 
-        return VIEW_OWNER_CREATE_OR_UPDATE_FORM;
+        return VIEWS_OWNER_CREATE_OR_UPDATE_FORM;
     }
 
     @PostMapping("/new")
     public String processCreationForm(@ModelAttribute Owner owner, BindingResult result) throws Exception {
         if (result.hasErrors()) {
-            return VIEW_OWNER_CREATE_OR_UPDATE_FORM;
+            return VIEWS_OWNER_CREATE_OR_UPDATE_FORM;
         } else {
             Owner savedOwner = ownerService.save(owner);
+            return "redirect:/owners/" + savedOwner.getId();
+        }
+    }
+
+
+    @GetMapping("/{ownerId}/edit")
+    public String initUpdateForm(@PathVariable Long ownerId, Model model) {
+        model.addAttribute("owner", ownerService.findById(ownerId));
+        System.out.println("Found ownerId: " + ownerService.findById(ownerId).getId());
+
+        return VIEWS_OWNER_CREATE_OR_UPDATE_FORM;
+
+    }
+
+    @PostMapping("/{ownerId}/edit")
+    public String processUpdateForm(Owner owner, BindingResult result, @PathVariable Long ownerId) {
+        if (result.hasErrors()) {
+            return VIEWS_OWNER_CREATE_OR_UPDATE_FORM;
+        } else {
+            System.out.println("Saving owner with id:" + owner.getId());
+//            owner.setId(ownerId); Only needed when owner.id is not persisted in Thymeleaf form
+            Owner savedOwner = ownerService.save(owner);
+            System.out.println("SavedownerId: " + savedOwner.getId());
             return "redirect:/owners/" + savedOwner.getId();
         }
     }
